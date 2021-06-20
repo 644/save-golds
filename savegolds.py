@@ -69,6 +69,7 @@ def file_in_use(fpath):
             return True
     
 def ffmpeg_extract_subclip(filename, t1, t2, targetname=None):
+    sleep(1)
     name, ext = os.path.splitext(filename)
     if not targetname:
         T1, T2 = [int(1000*t) for t in [t1, t2]]
@@ -126,10 +127,10 @@ def cut_replay(seconds, new_path, outfile, remove, from_end, last_replay):
             if duration > seconds:
                 if from_end:
                     if debug_mode: print("[AR] from_end")
-                    ffmpeg_extract_subclip(last_replay, duration - seconds, duration, targetname=new_replay)
+                    ffmpeg_extract_subclip(last_replay, duration - seconds, duration+7, targetname=new_replay)
                 else:
                     if debug_mode: print("[AR] from_begin")
-                    ffmpeg_extract_subclip(last_replay, 0, seconds, targetname=new_replay)
+                    ffmpeg_extract_subclip(last_replay, 0, seconds+7, targetname=new_replay)
             else:
                 copyfile(last_replay, new_replay)
                 
@@ -221,7 +222,7 @@ def ask_livesplit():
 
         if lasttime:
             sleep(1)
-            totaltime = round(curtime - lasttime, 2) + 1
+            totaltime = round(curtime - lasttime, 2) + 2
             outfile = "{}_{}_{}.mkv".format(index, totaltime, splitname)
             filelist = glob.glob(dir+"{}_*_*.mkv".format(index))
             if filelist:
@@ -242,7 +243,7 @@ def ask_livesplit():
                     etime = perf_counter()
                     substart = float(f"{etime-stime:0.2f}")
                     if duration:
-                        starttime = starttime + duration - 5
+                        starttime = starttime + duration - 2
                         if substart > 0:
                             starttime = starttime - substart
             else:
@@ -257,7 +258,7 @@ def ask_livesplit():
                 etime = perf_counter()
                 substart = float(f"{etime-stime:0.2f}")
                 if duration:
-                    starttime = starttime + duration - 5
+                    starttime = starttime + duration - 2
                     if substart > 0:
                         starttime = starttime - substart
     
