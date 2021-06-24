@@ -1,0 +1,11 @@
+C:\Users\Braydon\Git\save-golds\SaveGolds\SaveGolds\bin\Debug\SaveGolds.exe.config
+C:\Users\Braydon\Git\save-golds\SaveGolds\SaveGolds\bin\Debug\SaveGolds.exe
+C:\Users\Braydon\Git\save-golds\SaveGolds\SaveGolds\bin\Debug\SaveGolds.pdb
+C:\Users\Braydon\Git\save-golds\SaveGolds\SaveGolds\obj\Debug\SaveGolds.csproj.AssemblyReference.cache
+C:\Users\Braydon\Git\save-golds\SaveGolds\SaveGolds\obj\Debug\SaveGolds.ConnectForm.resources
+C:\Users\Braydon\Git\save-golds\SaveGolds\SaveGolds\obj\Debug\SaveGolds.Properties.Resources.resources
+C:\Users\Braydon\Git\save-golds\SaveGolds\SaveGolds\obj\Debug\SaveGolds.SaveGolds.resources
+C:\Users\Braydon\Git\save-golds\SaveGolds\SaveGolds\obj\Debug\SaveGolds.csproj.GenerateResource.cache
+C:\Users\Braydon\Git\save-golds\SaveGolds\SaveGolds\obj\Debug\SaveGolds.csproj.CoreCompileInputs.cache
+C:\Users\Braydon\Git\save-golds\SaveGolds\SaveGolds\obj\Debug\SaveGolds.exe
+C:\Users\Braydon\Git\save-golds\SaveGolds\SaveGolds\obj\Debug\SaveGolds.pdb
