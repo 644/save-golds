@@ -18,7 +18,8 @@ namespace SaveGolds
             try
             {
                 var client = new LiveSplitClient(server, port);
-                var mainForm = new SaveGolds(client);
+                var ffmpegClient = new FFmpegClient();
+                var mainForm = new SaveGolds(client, ffmpegClient);
                 mainForm.Show();
             } 
             catch(InvalidOperationException)

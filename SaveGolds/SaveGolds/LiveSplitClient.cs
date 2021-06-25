@@ -3,12 +3,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SaveGolds
 {
     public class LiveSplitClient : IDisposable
     {
-        private Socket LiveSplitSocket;
+        public Socket LiveSplitSocket;
 
         public LiveSplitClient(string server="localhost", int port=16834)
         {
@@ -16,6 +17,7 @@ namespace SaveGolds
             var ip = hostEntry.AddressList.First(address => !address.ToString().Contains("::"));
             var ipe = new IPEndPoint(ip, port);
             var tempSocket = new Socket(ipe.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            tempSocket.ReceiveTimeout = 500;
             tempSocket.Connect(ipe);
 
             if (!tempSocket.Connected)
@@ -32,27 +34,36 @@ namespace SaveGolds
             LiveSplitSocket.Close();
         }
 
-        public string GetSplitIndex() => LiveSplitRequest("getsplitindex\r\n");
+        public async Task<string> GetSplitIndex() => await LiveSplitRequest("getsplitindex\r\n");
 
-        public string GetPreviousSplitName() => LiveSplitRequest("getprevioussplitname\r\n");
+        public async Task<string> GetPreviousSplitName() => await LiveSplitRequest("getprevioussplitname\r\n");
 
-        public string GetLastSplitTime() => LiveSplitRequest("getlastsplittime\r\n");
+        public async Task<string> GetLastSplitTime() => await LiveSplitRequest("getlastsplittime\r\n");
 
-        public string GetCurrentTime() => LiveSplitRequest("getcurrenttime\r\n");
+        public async Task<string> GetCurrentTime() => await LiveSplitRequest("getcurrenttime\r\n");
 
-        public string GetComparisonSplitTime() => LiveSplitRequest("getcomparisonsplittime\r\n");
+        public async Task<string> GetComparisonSplitTime() => await LiveSplitRequest("getcomparisonsplittime\r\n");
 
-        public string GetCurrentTimerPhase() => LiveSplitRequest("getcurrenttimerphase\r\n");
+        public async Task<string> GetCurrentTimerPhaseAsync() => await LiveSplitRequest("getcurrenttimerphase\r\n");
 
-        private string LiveSplitRequest(string request)
+        private async Task<string> LiveSplitRequest(string request)
         {
             byte[] send = Encoding.ASCII.GetBytes(request);
             byte[] receive = new byte[256];
 
             LiveSplitSocket.Send(send);
 
-            int bytes = LiveSplitSocket.Receive(receive);
-            return Encoding.ASCII.GetString(receive, 0, bytes);
+            try {
+                int bytes = LiveSplitSocket.Receive(receive);
+                return await Task.FromResult(Encoding.ASCII.GetString(receive, 0, bytes));
+            } catch (System.Net.Sockets.SocketException) {
+                return "-1";
+            }
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
     }
 
