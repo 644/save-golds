@@ -1,0 +1,10 @@
+# IDE Files
+*/.vs/
+
+# Debug files
+*/bin/
+*/obj/
+*/packages/
+
+# Files inside Config folder
+*/Config/**

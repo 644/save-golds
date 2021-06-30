@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace SaveGolds
+namespace SaveGolds.Clients
 {
-    public class FFmpegClient : IDisposable
+    public class FFmpegClient
     {
         public string CutVid(string inputPath, string outPath, int copyTime)
         {
@@ -18,11 +18,6 @@ namespace SaveGolds
             proc.Close();
 
             return "Finished cropping";
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
         }
     }
 }
