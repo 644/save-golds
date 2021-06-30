@@ -5,9 +5,9 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SaveGolds
+namespace SaveGolds.Clients
 {
-    public class LiveSplitClient : IDisposable
+    public class LiveSplitClient 
     {
         public Socket LiveSplitSocket;
 
@@ -59,11 +59,6 @@ namespace SaveGolds
             } catch (System.Net.Sockets.SocketException) {
                 return "-1";
             }
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
         }
     }
 
